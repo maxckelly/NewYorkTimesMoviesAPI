@@ -14,10 +14,6 @@ input.addEventListener('input', (event) => {
 
   axios.get(`https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${input.value}&api-key=xIWGFzxCIlvycOEDzOPJcriGp2MwnoB4`).then((response) => {
 
-  if (response.status === 429) {
-    return alert("to many requests");
-  };
-
     // console.log(response);
     let movieData = response.data.results
 
@@ -26,10 +22,13 @@ input.addEventListener('input', (event) => {
       console.log(movie.multimedia.src);
       let movieTitle = document.createElement('h3');
       let movieDescription = document.createElement('p');
+      let movieImage = document.createElement('img');
       movieTitle.innerHTML += movie.display_title;
       movieDescription.innerHTML += movie.headline;
+      movieImage.src = movie.multimedia.src
       document.querySelector('.movies').appendChild(movieTitle);
       document.querySelector('.movies').appendChild(movieDescription);
+      document.querySelector('.movies').appendChild(movieImage);
     })
   }) 
 });
